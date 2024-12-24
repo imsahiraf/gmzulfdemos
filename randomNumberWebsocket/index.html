@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Random Numbers</title>
+  <script>
+    // Create a WebSocket connection
+    const socket = new WebSocket('ws://node-app-lb-2034998228.ap-south-1.elb.amazonaws.com');
+
+    // Handle messages received from the server
+    socket.addEventListener('message', (event) => {
+      const randomNumber = event.data;
+      document.getElementById('randomNumber').innerText = randomNumber;
+    });
+  </script>
+</head>
+<body>
+  <h1>Random Number:</h1>
+  <p id="randomNumber"></p>
+</body>
+</html>

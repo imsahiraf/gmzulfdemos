@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Rate Limiting Test</title>
+  <script>
+    let authToken = null;
+
+    // Send a request to login and retrieve the authentication token
+    const login = () => {
+      fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: 'user1', password: 'password1' }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          authToken = data.token;
+          console.log('Login successful. Token:', authToken);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
+
+    // Send a GET request to the protected route
+    const sendRequest = () => {
+      if (!authToken) {
+        console.log('Please login first.');
+        return;
+      }
+
+      fetch('http://localhost:8080/protected', {
+        method: 'GET',
+        headers: {
+          Authorization: authToken,
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Response:', data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
+
+    // Send a GET request to the additional route
+    const sendAdditionalRequest = () => {
+      if (!authToken) {
+        console.log('Please login first.');
+        return;
+      }
+
+      fetch('http://localhost:8080/additional', {
+        method: 'GET',
+        headers: {
+          Authorization: authToken,
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Additional Response:', data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
+  </script>
+</head>
+
+<body>
+  <h1>Rate Limiting Test</h1>
+  <button onclick="login()">Login</button>
+  <button onclick="sendRequest()">Send Request</button>
+  <button onclick="sendAdditionalRequest()">Send Additional Request</button>
+</body>
+
+</html>

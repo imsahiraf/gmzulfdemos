@@ -1,0 +1,21 @@
+{
+  "name": "imagequalitycheck",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.0",
+    "gm": "^1.25.0",
+    "image-q": "^4.0.0",
+    "image-ssim": "^0.2.0",
+    "jimp": "^0.22.10",
+    "sharp": "^0.32.6",
+    "ssim": "^0.0.0"
+  }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socket.io Chat Room</title>
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <script src="/node_modules/socket.io/client-dist/socket.io.js"></script>
+</head>
+<body>
+  <h1>Socket.io Chat Room</h1>
+  <div id="messages"></div>
+  <form>
+    <input id="message-input" type="text" placeholder="Type your message here...">
+    <button id="send-button" type="submit">Send</button>
+  </form>
+
+  <script>
+    const socket = io();
+
+    // Handle incoming chat messages from the server
+    socket.on('message', (message) => {
+      const messagesDiv = document.getElementById('messages');
+      const messageElem = document.createElement('div');
+      messageElem.innerText = message;
+      messagesDiv.appendChild(messageElem);
+    });
+
+    // Handle form submission to send a new chat message
+    document.querySelector('form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const inputElem = document.getElementById('message-input');
+      const message = inputElem.value;
+      inputElem.value = '';
+      socket.emit('message', message);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Realtime Data Streaming Example</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-qzKjR91PfQdPFTI6xnbElMroaCJ3q3cimzLmzFENZfKmRgy2dZXLm6l0xIy9pspXq3cHgIXN+WyNXZmKU6vN8w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+	<h1>Realtime Data Streaming Example</h1>
+	<ul id="data"></ul>
+
+	<script>
+		const socket = io();
+		socket.on('data', (msg) => {
+			const item = document.createElement('li');
+			item.textContent = msg;
+			document.getElementById('data').appendChild(item);
+		});
+	</script>
+</body>
+</html>
